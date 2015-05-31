@@ -173,4 +173,12 @@ public class HuffmanTreeTest {
         assertEquals(expResult, table);
 
     }
+
+    @Test
+    public void testCodingText() {
+        HuffmanTree instance = new HuffmanTree();
+        String result = instance.codingText("AAAAAABBBBBCCCCDDDEEF");
+        String expResult = "111111111111010101010100000000101101101100110011000";
+        assertEquals(expResult, result);
+    }
 }

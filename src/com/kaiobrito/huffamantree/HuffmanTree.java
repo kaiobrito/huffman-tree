@@ -113,4 +113,25 @@ public class HuffmanTree implements ITree {
         return result;
     }
 
+    @Override
+    public String codingText() {
+        return encode(getCompressText());
+    }
+
+    @Override
+    public String codingText(String text) {
+        setCompressText(text);
+        return encode(text);
+    }
+
+    private String encode(String text) {
+        HashMap<String, String> huffmanTable = toTable();
+        char[] textArray = text.toCharArray();
+        String codedText = "";
+        for (char word : textArray) {
+            codedText += huffmanTable.get(String.valueOf(word));
+        }
+        return codedText;
+    }
+
 }

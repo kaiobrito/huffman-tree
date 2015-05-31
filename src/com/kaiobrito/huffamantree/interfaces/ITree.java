@@ -21,4 +21,8 @@ public interface ITree {
     public INode getLessFrenquentSymbol();
 
     public HashMap<String, String> toTable();
+
+    public String codingText(String text);
+
+    public String codingText();
 }
