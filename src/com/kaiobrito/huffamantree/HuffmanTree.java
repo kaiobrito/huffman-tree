@@ -9,6 +9,7 @@ import com.kaiobrito.huffamantree.interfaces.INode;
 import com.kaiobrito.huffamantree.interfaces.ITree;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 
 /**
  *
@@ -99,6 +100,17 @@ public class HuffmanTree implements ITree {
             }
         }
 
+    }
+
+    @Override
+    public HashMap<String, String> toTable() {
+        INode root = toTree();
+        HashMap<String, String> result = new HashMap<>();
+        for (INode leaf : root.getLeafs()) {
+            String leafSymbol = leaf.getItem().getSymbol();
+            result.put(leafSymbol, root.getBinarySon(leafSymbol));
+        }
+        return result;
     }
 
 }

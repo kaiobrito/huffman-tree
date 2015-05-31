@@ -7,6 +7,7 @@ package com.kaiobrito.huffamantree;
 
 import com.kaiobrito.huffamantree.interfaces.INode;
 import java.util.ArrayList;
+import java.util.HashMap;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -155,5 +156,21 @@ public class HuffmanTreeTest {
         assertEquals("101", root.getBinarySon("d"));
         assertEquals("1001", root.getBinarySon("e"));
         assertEquals("1000", root.getBinarySon("f"));
+    }
+
+    @Test
+    public void testToTable() {
+        HuffmanTree instance = new HuffmanTree("aaaaaabbbbbccccdddeef");
+        HashMap<String, String> expResult = new HashMap<>();
+        expResult.put("a", "11");
+        expResult.put("b", "01");
+        expResult.put("c", "00");
+        expResult.put("d", "101");
+        expResult.put("e", "1001");
+        expResult.put("f", "1000");
+
+        HashMap<String, String> table = instance.toTable();
+        assertEquals(expResult, table);
+
     }
 }

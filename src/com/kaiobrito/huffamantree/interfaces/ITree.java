@@ -6,6 +6,7 @@
 package com.kaiobrito.huffamantree.interfaces;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -13,9 +14,11 @@ import java.util.ArrayList;
  */
 public interface ITree {
 
-    public abstract INode toTree();
+    public INode toTree();
 
-    public abstract ArrayList<INode> getTheTwoLessFrequenciesSymbols();
+    public ArrayList<INode> getTheTwoLessFrequenciesSymbols();
 
-    public abstract INode getLessFrenquentSymbol();
+    public INode getLessFrenquentSymbol();
+
+    public HashMap<String, String> toTable();
 }
