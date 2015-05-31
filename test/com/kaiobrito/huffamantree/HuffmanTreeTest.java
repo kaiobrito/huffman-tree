@@ -61,11 +61,12 @@ public class HuffmanTreeTest {
         HuffmanItem h1 = new HuffmanItem("a", 1);
         HuffmanItem h2 = new HuffmanItem("b", 1);
         HuffmanTree instance = new HuffmanTree();
-        ArrayList<HuffmanItem> huffmanArray = new ArrayList<>();
-        huffmanArray.add(h1);
-        huffmanArray.add(h2);
+        ArrayList<Node> huffmanArray = new ArrayList<>();
+        Node n1 = new Node(h1);
+        huffmanArray.add(n1);
+        huffmanArray.add(new Node(h2));
         instance.setItens(huffmanArray);
-        assertEquals(instance.getItemWithSymbol("a"), h1);
+        assertEquals(instance.getItemWithSymbol("a"), n1);
 
     }
 
@@ -75,9 +76,9 @@ public class HuffmanTreeTest {
         HuffmanItem h1 = new HuffmanItem("a", 1);
         HuffmanItem h2 = new HuffmanItem("b", 1);
         HuffmanTree instance = new HuffmanTree();
-        ArrayList<HuffmanItem> huffmanArray = new ArrayList<>();
-        huffmanArray.add(h1);
-        huffmanArray.add(h2);
+        ArrayList<Node> huffmanArray = new ArrayList<>();
+        huffmanArray.add(new Node(h1));
+        huffmanArray.add(new Node(h2));
         instance.setItens(huffmanArray);
         assertEquals(instance.getItemWithSymbol(" "), null);
 
@@ -89,10 +90,10 @@ public class HuffmanTreeTest {
         String compressText = "aaabbc ";
         HuffmanTree instance = new HuffmanTree();
         instance.setCompressText(compressText);
-        assertEquals(instance.getItemWithSymbol("a").getWeight(), 3, 0);
-        assertEquals(instance.getItemWithSymbol("b").getWeight(), 2, 0);
-        assertEquals(instance.getItemWithSymbol("c").getWeight(), 1, 0);
-        assertEquals(instance.getItemWithSymbol(" ").getWeight(), 1, 0);
+        assertEquals(instance.getItemWithSymbol("a").getItem().getWeight(), 3, 0);
+        assertEquals(instance.getItemWithSymbol("b").getItem().getWeight(), 2, 0);
+        assertEquals(instance.getItemWithSymbol("c").getItem().getWeight(), 1, 0);
+        assertEquals(instance.getItemWithSymbol(" ").getItem().getWeight(), 1, 0);
 
     }
 
@@ -101,10 +102,10 @@ public class HuffmanTreeTest {
         System.out.println("SetCompressTextTestItensCounts");
         String compressText = "aaabbc ";
         HuffmanTree instance = new HuffmanTree(compressText);
-        assertEquals(instance.getItemWithSymbol("a").getWeight(), 3, 0);
-        assertEquals(instance.getItemWithSymbol("b").getWeight(), 2, 0);
-        assertEquals(instance.getItemWithSymbol("c").getWeight(), 1, 0);
-        assertEquals(instance.getItemWithSymbol(" ").getWeight(), 1, 0);
+        assertEquals(instance.getItemWithSymbol("a").getItem().getWeight(), 3, 0);
+        assertEquals(instance.getItemWithSymbol("b").getItem().getWeight(), 2, 0);
+        assertEquals(instance.getItemWithSymbol("c").getItem().getWeight(), 1, 0);
+        assertEquals(instance.getItemWithSymbol(" ").getItem().getWeight(), 1, 0);
 
     }
 
@@ -114,7 +115,7 @@ public class HuffmanTreeTest {
         String compressText = "daaabbc ";
         HuffmanTree instance = new HuffmanTree();
         instance.setCompressText(compressText);
-        assertEquals(instance.getLessFrenquentSymbol().compareTo(new HuffmanItem(" ", 1)), 0);
+        assertEquals(instance.getLessFrenquentSymbol().compareTo(new Node(new HuffmanItem(" ", 1))), 0);
 
     }
 
@@ -124,11 +125,11 @@ public class HuffmanTreeTest {
         String compressText = "daaabbc ";
         HuffmanTree instance = new HuffmanTree();
         instance.setCompressText(compressText);
-        ArrayList<HuffmanItem> expresult = new ArrayList<>();
-        expresult.add(new HuffmanItem(" ", 1));
-        expresult.add(new HuffmanItem("c", 1));
+        ArrayList<Node> expresult = new ArrayList<>();
+        expresult.add(new Node(new HuffmanItem(" ", 1)));
+        expresult.add(new Node(new HuffmanItem("c", 1)));
 
-        ArrayList<HuffmanItem> result = instance.getTheTwoLessFrequenciesSymbols();
+        ArrayList<Node> result = instance.getTheTwoLessFrequenciesSymbols();
         assertEquals(expresult.get(0).compareTo(result.get(0)), 0);
         assertEquals(expresult.get(1).compareTo(result.get(1)), 0);
 

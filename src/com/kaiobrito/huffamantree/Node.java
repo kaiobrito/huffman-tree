@@ -11,7 +11,7 @@ import java.util.HashMap;
  *
  * @author kaiobrito
  */
-public class Node {
+public class Node implements Comparable<Node> {
 
     private Node leftNode;
     private Node rightNode;
@@ -39,6 +39,10 @@ public class Node {
         }
     }
 
+    public HuffmanItem getItem() {
+        return value;
+    }
+
     public int getValue() {
         return value.getWeight();
     }
@@ -53,6 +57,11 @@ public class Node {
 
     public Node getRightNode() {
         return rightNode;
+    }
+
+    @Override
+    public int compareTo(Node o) {
+        return this.getItem().compareTo(o.getItem());
     }
 
 }

@@ -14,44 +14,49 @@ import java.util.Collections;
  */
 public class HuffmanTree {
 
-    private ArrayList<HuffmanItem> itens;
+    private ArrayList<Node> itens;
     private String compressText;
 
-    public ArrayList<HuffmanItem> getItens() {
+    public ArrayList<Node> getItens() {
         return itens;
     }
 
     public HuffmanTree() {
     }
 
+    public void toTree() {
+        ArrayList<Node> twoLess = getTheTwoLessFrequenciesSymbols();
+
+    }
+
     public HuffmanTree(String compressText) {
         this.setCompressText(compressText);
     }
 
-    public void setItens(ArrayList<HuffmanItem> itens) {
+    public void setItens(ArrayList<Node> itens) {
         this.itens = itens;
     }
 
-    public HuffmanItem getItemWithSymbol(String symbol) {
-        for (HuffmanItem item : itens) {
-            if (item.getSymbol().equals(symbol)) {
+    public Node getItemWithSymbol(String symbol) {
+        for (Node item : itens) {
+            if (item.getItem().getSymbol().equals(symbol)) {
                 return item;
             }
         }
         return null;
     }
 
-    public HuffmanItem getLessFrenquentSymbol() {
+    public Node getLessFrenquentSymbol() {
         Collections.sort(itens);
-        HuffmanItem item = itens.get(0);
+        Node item = itens.get(0);
         itens.remove(0);
         return item;
 
     }
 
-    public ArrayList<HuffmanItem> getTheTwoLessFrequenciesSymbols() {
+    public ArrayList<Node> getTheTwoLessFrequenciesSymbols() {
         Collections.sort(itens);
-        ArrayList<HuffmanItem> result = new ArrayList<>();
+        ArrayList<Node> result = new ArrayList<>();
 
         result.add(getLessFrenquentSymbol());
         result.add(getLessFrenquentSymbol());
@@ -68,11 +73,11 @@ public class HuffmanTree {
         this.itens = new ArrayList<>();
         char[] textArray = compressText.toCharArray();
         for (char word : textArray) {
-            HuffmanItem symbol = getItemWithSymbol(String.valueOf(word));
-            Integer count = (symbol == null) ? 0 : symbol.getWeight();
-            if (symbol == null) {
-                itens.add(new HuffmanItem(String.valueOf(word), 1));
+            Node node = getItemWithSymbol(String.valueOf(word));
+            if (node == null) {
+                itens.add(new Node(new HuffmanItem(String.valueOf(word), 1)));
             } else {
+                HuffmanItem symbol = node.getItem();
                 symbol.setWeight(symbol.getWeight() + 1);
             }
         }
