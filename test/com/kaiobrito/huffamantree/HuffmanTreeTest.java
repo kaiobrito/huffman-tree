@@ -109,14 +109,28 @@ public class HuffmanTreeTest {
     }
 
     @Test
-    public void testGetLessFrequentHuffmanItens() {
+    public void testGetLessFrequentHuffmanSymbol() {
         System.out.println("GetLessFrequentHuffmanItens");
         String compressText = "daaabbc ";
         HuffmanTree instance = new HuffmanTree();
         instance.setCompressText(compressText);
-        System.out.println(instance.getTheLessFrequenctTwoSymbols());
-        System.out.println(instance.getTheLessFrequenctTwoSymbols());
-        System.out.println(instance.getTheLessFrequenctTwoSymbols());
+        assertEquals(instance.getLessFrenquentSymbol().compareTo(new HuffmanItem(" ", 1)), 0);
+
+    }
+
+    @Test
+    public void testgetTheTwoLessFrequenciesSymbols() {
+        System.out.println("getTheTwoLessFrequenciesSymbols");
+        String compressText = "daaabbc ";
+        HuffmanTree instance = new HuffmanTree();
+        instance.setCompressText(compressText);
+        ArrayList<HuffmanItem> expresult = new ArrayList<>();
+        expresult.add(new HuffmanItem(" ", 1));
+        expresult.add(new HuffmanItem("c", 1));
+
+        ArrayList<HuffmanItem> result = instance.getTheTwoLessFrequenciesSymbols();
+        assertEquals(expresult.get(0).compareTo(result.get(0)), 0);
+        assertEquals(expresult.get(1).compareTo(result.get(1)), 0);
 
     }
 }

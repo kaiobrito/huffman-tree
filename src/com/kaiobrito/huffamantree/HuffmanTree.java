@@ -41,13 +41,20 @@ public class HuffmanTree {
         return null;
     }
 
-    public ArrayList<HuffmanItem> getTheLessFrequenctTwoSymbols() {
+    public HuffmanItem getLessFrenquentSymbol() {
+        Collections.sort(itens);
+        HuffmanItem item = itens.get(0);
+        itens.remove(0);
+        return item;
+
+    }
+
+    public ArrayList<HuffmanItem> getTheTwoLessFrequenciesSymbols() {
         Collections.sort(itens);
         ArrayList<HuffmanItem> result = new ArrayList<>();
-        for (int i = 0; i < 2 && i < itens.size(); i++) {
-            result.add(0, itens.get(0));
-            itens.remove(0);
-        }
+
+        result.add(getLessFrenquentSymbol());
+        result.add(getLessFrenquentSymbol());
         Collections.sort(result);
         return result;
     }

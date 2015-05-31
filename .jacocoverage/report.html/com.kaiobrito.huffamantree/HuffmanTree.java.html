@@ -41,36 +41,43 @@ public class HuffmanTree {
 <span class="fc" id="L41">        return null;</span>
     }
 
-    public ArrayList&lt;HuffmanItem&gt; getTheLessFrequenctTwoSymbols() {
+    public HuffmanItem getLessFrenquentSymbol() {
 <span class="fc" id="L45">        Collections.sort(itens);</span>
-<span class="fc" id="L46">        ArrayList&lt;HuffmanItem&gt; result = new ArrayList&lt;&gt;();</span>
-<span class="fc bfc" id="L47" title="All 4 branches covered.">        for (int i = 0; i &lt; 2 &amp;&amp; i &lt; itens.size(); i++) {</span>
-<span class="fc" id="L48">            result.add(0, itens.get(0));</span>
-<span class="fc" id="L49">            itens.remove(0);</span>
-        }
-<span class="fc" id="L51">        Collections.sort(result);</span>
-<span class="fc" id="L52">        return result;</span>
+<span class="fc" id="L46">        HuffmanItem item = itens.get(0);</span>
+<span class="fc" id="L47">        itens.remove(0);</span>
+<span class="fc" id="L48">        return item;</span>
+
+    }
+
+    public ArrayList&lt;HuffmanItem&gt; getTheTwoLessFrequenciesSymbols() {
+<span class="fc" id="L53">        Collections.sort(itens);</span>
+<span class="fc" id="L54">        ArrayList&lt;HuffmanItem&gt; result = new ArrayList&lt;&gt;();</span>
+
+<span class="fc" id="L56">        result.add(getLessFrenquentSymbol());</span>
+<span class="fc" id="L57">        result.add(getLessFrenquentSymbol());</span>
+<span class="fc" id="L58">        Collections.sort(result);</span>
+<span class="fc" id="L59">        return result;</span>
     }
 
     public String getCompressText() {
-<span class="fc" id="L56">        return compressText;</span>
+<span class="fc" id="L63">        return compressText;</span>
     }
 
     public void setCompressText(String compressText) {
-<span class="fc" id="L60">        this.compressText = compressText;</span>
-<span class="fc" id="L61">        this.itens = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L62">        char[] textArray = compressText.toCharArray();</span>
-<span class="fc bfc" id="L63" title="All 2 branches covered.">        for (char word : textArray) {</span>
-<span class="fc" id="L64">            HuffmanItem symbol = getItemWithSymbol(String.valueOf(word));</span>
-<span class="fc bfc" id="L65" title="All 2 branches covered.">            Integer count = (symbol == null) ? 0 : symbol.getWeight();</span>
-<span class="fc bfc" id="L66" title="All 2 branches covered.">            if (symbol == null) {</span>
-<span class="fc" id="L67">                itens.add(new HuffmanItem(String.valueOf(word), 1));</span>
+<span class="fc" id="L67">        this.compressText = compressText;</span>
+<span class="fc" id="L68">        this.itens = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L69">        char[] textArray = compressText.toCharArray();</span>
+<span class="fc bfc" id="L70" title="All 2 branches covered.">        for (char word : textArray) {</span>
+<span class="fc" id="L71">            HuffmanItem symbol = getItemWithSymbol(String.valueOf(word));</span>
+<span class="fc bfc" id="L72" title="All 2 branches covered.">            Integer count = (symbol == null) ? 0 : symbol.getWeight();</span>
+<span class="fc bfc" id="L73" title="All 2 branches covered.">            if (symbol == null) {</span>
+<span class="fc" id="L74">                itens.add(new HuffmanItem(String.valueOf(word), 1));</span>
             } else {
-<span class="fc" id="L69">                symbol.setWeight(symbol.getWeight() + 1);</span>
+<span class="fc" id="L76">                symbol.setWeight(symbol.getWeight() + 1);</span>
             }
         }
 
-<span class="fc" id="L73">    }</span>
+<span class="fc" id="L80">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
