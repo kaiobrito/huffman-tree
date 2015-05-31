@@ -5,17 +5,17 @@
  */
 package com.kaiobrito.huffamantree.interfaces;
 
-import com.kaiobrito.huffamantree.Node;
+import java.util.ArrayList;
 
 /**
  *
  * @author kaiobrito
  */
-public interface KTree {
+public interface ITree {
 
-    public void addNode(Node node);
+    public abstract INode toTree();
 
-    public void removeNode(Node node);
+    public abstract ArrayList<INode> getTheTwoLessFrequenciesSymbols();
 
-    public void contains(Node node);
+    public abstract INode getLessFrenquentSymbol();
 }

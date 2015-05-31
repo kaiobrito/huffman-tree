@@ -5,6 +5,8 @@
  */
 package com.kaiobrito.huffamantree;
 
+import com.kaiobrito.huffamantree.interfaces.INode;
+import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -35,6 +37,15 @@ public class NodeTest {
 
     @After
     public void tearDown() {
+    }
+
+    @Test
+    public void testToString() {
+
+        HuffmanItem item = new HuffmanItem("a", 100);
+        Node instance = new Node(item);
+        assertEquals(item.toString(), instance.toString());
+
     }
 
     @Test
@@ -86,6 +97,18 @@ public class NodeTest {
     }
 
     @Test
+    public void testAddBiggerThenLowerNodeTwice() {
+        System.out.println("AddBiggerNode");
+        Node instance = new Node(new HuffmanItem("a", 100));
+        Node expResultRight = new Node(new HuffmanItem("b", 200));
+        instance.addSon(expResultRight);
+        Node expresult = new Node(new HuffmanItem("c", 30));
+        instance.addSon(expresult);
+        assertEquals(expresult, instance.getLeftNode());
+        assertEquals(expResultRight, instance.getRightNode());
+    }
+
+    @Test
     public void testIsLeaf() {
         System.out.println("isLeaf");
         Node instance = new Node(new HuffmanItem("a", 100));
@@ -123,4 +146,41 @@ public class NodeTest {
         boolean result = instance.isLeaf();
         assertTrue(result);
     }
+
+    @Test
+    public void testGetLeafs() {
+        System.out.println("GetLeafs");
+        HuffmanItem item = new HuffmanItem("a", 100);
+        Node itemb = new Node(new HuffmanItem("b", 200));
+        Node itemc = new Node(new HuffmanItem("c", 50));
+        Node instance = new Node(item);
+        instance.addSon(itemb);
+        instance.addSon(itemc);
+        ArrayList<INode> expresult = new ArrayList<>();
+        expresult.add(itemc);
+        expresult.add(itemb);
+        ArrayList<INode> result = instance.getLeafs();
+        assertEquals(expresult, result);
+    }
+
+    @Test
+    public void testGetRecursiveLeafs() {
+        System.out.println("GetRecursiveLeafs");
+        HuffmanItem item = new HuffmanItem("a", 100);
+        Node itemb = new Node(new HuffmanItem("b", 200));
+        Node itemb2 = new Node(new HuffmanItem("b2", 300));
+        Node itemc = new Node(new HuffmanItem("c", 50));
+        Node itemd = new Node(new HuffmanItem("d", 30));
+        Node instance = new Node(item);
+        instance.addSon(itemb);
+        instance.addSon(itemc);
+        instance.addSon(itemd);
+        instance.addSon(itemb2);
+        ArrayList<INode> expresult = new ArrayList<>();
+        expresult.add(itemd);
+        expresult.add(itemb2);
+        ArrayList<INode> result = instance.getLeafs();
+        assertEquals(expresult, result);
+    }
+
 }

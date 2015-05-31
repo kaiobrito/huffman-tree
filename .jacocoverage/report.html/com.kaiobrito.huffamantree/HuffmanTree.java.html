@@ -5,6 +5,8 @@
  */
 package com.kaiobrito.huffamantree;
 
+import com.kaiobrito.huffamantree.interfaces.INode;
+import com.kaiobrito.huffamantree.interfaces.ITree;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -12,89 +14,92 @@ import java.util.Collections;
  *
  * @author kaiobrito
  */
-public class HuffmanTree {
+public class HuffmanTree implements ITree {
 
-    private ArrayList&lt;Node&gt; itens;
-    private String compressText;
+    protected ArrayList&lt;INode&gt; itens;
+    protected String compressText;
 
-    public ArrayList&lt;Node&gt; getItens() {
-<span class="fc" id="L21">        return itens;</span>
+    public ArrayList&lt;INode&gt; getItens() {
+<span class="fc" id="L23">        return itens;</span>
     }
 
-<span class="fc" id="L24">    public HuffmanTree() {</span>
-<span class="fc" id="L25">    }</span>
+<span class="fc" id="L26">    public HuffmanTree() {</span>
+<span class="fc" id="L27">    }</span>
 
-    public String toTree() {
-<span class="fc" id="L28">        ArrayList&lt;Node&gt; copyItens = new ArrayList&lt;&gt;(itens);</span>
-<span class="fc bfc" id="L29" title="All 2 branches covered.">        while (itens.size() &gt; 1) {</span>
-<span class="fc" id="L30">            Collections.sort(itens);</span>
-<span class="fc" id="L31">            ArrayList&lt;Node&gt; twoLess = getTheTwoLessFrequenciesSymbols();</span>
-<span class="fc" id="L32">            Node n1 = twoLess.get(0);</span>
-<span class="fc" id="L33">            Node n2 = twoLess.get(1);</span>
-<span class="fc" id="L34">            Node root = new Node(new HuffmanItem(&quot;*&quot;, n1.getItem().getWeight() + n2.getItem().getWeight()));</span>
+    @Override
+    public INode toTree() {
+<span class="fc" id="L31">        ArrayList&lt;INode&gt; copyItens = new ArrayList&lt;&gt;(itens);</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        while (itens.size() &gt; 1) {</span>
+<span class="fc" id="L33">            Collections.sort(itens);</span>
+<span class="fc" id="L34">            ArrayList&lt;INode&gt; twoLess = getTheTwoLessFrequenciesSymbols();</span>
+<span class="fc" id="L35">            INode n1 = twoLess.get(0);</span>
+<span class="fc" id="L36">            INode n2 = twoLess.get(1);</span>
+<span class="fc" id="L37">            INode root = new Node(new HuffmanItem(&quot;*&quot;, n1.getItem().getWeight() + n2.getItem().getWeight()));</span>
 
-<span class="fc" id="L36">            root.setLeftNode(n1);</span>
-<span class="fc" id="L37">            root.setRightNode(n2);</span>
+<span class="fc" id="L39">            root.setLeftNode(n1);</span>
+<span class="fc" id="L40">            root.setRightNode(n2);</span>
 
-<span class="fc" id="L39">            itens.add(root);</span>
-<span class="fc" id="L40">        }</span>
-<span class="fc" id="L41">        return itens.get(0).preOrder();</span>
+<span class="fc" id="L42">            itens.add(root);</span>
+<span class="fc" id="L43">        }</span>
+<span class="fc" id="L44">        return itens.get(0);</span>
     }
 
-<span class="fc" id="L44">    public HuffmanTree(String compressText) {</span>
-<span class="fc" id="L45">        setCompressText(compressText);</span>
-<span class="fc" id="L46">    }</span>
+<span class="fc" id="L47">    public HuffmanTree(String compressText) {</span>
+<span class="fc" id="L48">        setCompressText(compressText);</span>
+<span class="fc" id="L49">    }</span>
 
-    public void setItens(ArrayList&lt;Node&gt; itens) {
-<span class="fc" id="L49">        this.itens = itens;</span>
-<span class="fc" id="L50">    }</span>
+    public void setItens(ArrayList&lt;INode&gt; itens) {
+<span class="fc" id="L52">        this.itens = itens;</span>
+<span class="fc" id="L53">    }</span>
 
-    public Node getItemWithSymbol(String symbol) {
-<span class="fc bfc" id="L53" title="All 2 branches covered.">        for (Node item : itens) {</span>
-<span class="fc bfc" id="L54" title="All 2 branches covered.">            if (item.getItem().getSymbol().equals(symbol)) {</span>
-<span class="fc" id="L55">                return item;</span>
+    public INode getItemWithSymbol(String symbol) {
+<span class="fc bfc" id="L56" title="All 2 branches covered.">        for (INode item : itens) {</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">            if (item.getItem().getSymbol().equals(symbol)) {</span>
+<span class="fc" id="L58">                return item;</span>
             }
-<span class="fc" id="L57">        }</span>
-<span class="fc" id="L58">        return null;</span>
+<span class="fc" id="L60">        }</span>
+<span class="fc" id="L61">        return null;</span>
     }
 
-    public Node getLessFrenquentSymbol() {
-<span class="fc" id="L62">        Collections.sort(itens);</span>
-<span class="fc" id="L63">        Node item = itens.get(0);</span>
-<span class="fc" id="L64">        itens.remove(0);</span>
-<span class="fc" id="L65">        return item;</span>
+    @Override
+    public INode getLessFrenquentSymbol() {
+<span class="fc" id="L66">        Collections.sort(itens);</span>
+<span class="fc" id="L67">        INode item = itens.get(0);</span>
+<span class="fc" id="L68">        itens.remove(0);</span>
+<span class="fc" id="L69">        return item;</span>
 
     }
 
-    public ArrayList&lt;Node&gt; getTheTwoLessFrequenciesSymbols() {
-<span class="fc" id="L70">        Collections.sort(itens);</span>
-<span class="fc" id="L71">        ArrayList&lt;Node&gt; result = new ArrayList&lt;&gt;();</span>
+    @Override
+    public ArrayList&lt;INode&gt; getTheTwoLessFrequenciesSymbols() {
+<span class="fc" id="L75">        Collections.sort(itens);</span>
+<span class="fc" id="L76">        ArrayList&lt;INode&gt; result = new ArrayList&lt;&gt;();</span>
 
-<span class="fc" id="L73">        result.add(getLessFrenquentSymbol());</span>
-<span class="fc" id="L74">        result.add(getLessFrenquentSymbol());</span>
-<span class="fc" id="L75">        Collections.sort(result);</span>
-<span class="fc" id="L76">        return result;</span>
+<span class="fc" id="L78">        result.add(getLessFrenquentSymbol());</span>
+<span class="fc" id="L79">        result.add(getLessFrenquentSymbol());</span>
+<span class="fc" id="L80">        Collections.sort(result);</span>
+<span class="fc" id="L81">        return result;</span>
     }
 
     public String getCompressText() {
-<span class="fc" id="L80">        return compressText;</span>
+<span class="fc" id="L85">        return compressText;</span>
     }
 
     public void setCompressText(String compressText) {
-<span class="fc" id="L84">        this.compressText = compressText;</span>
-<span class="fc" id="L85">        this.itens = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L86">        char[] textArray = compressText.toCharArray();</span>
-<span class="fc bfc" id="L87" title="All 2 branches covered.">        for (char word : textArray) {</span>
-<span class="fc" id="L88">            Node node = getItemWithSymbol(String.valueOf(word));</span>
-<span class="fc bfc" id="L89" title="All 2 branches covered.">            if (node == null) {</span>
-<span class="fc" id="L90">                itens.add(new Node(new HuffmanItem(String.valueOf(word), 1)));</span>
+<span class="fc" id="L89">        this.compressText = compressText;</span>
+<span class="fc" id="L90">        this.itens = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L91">        char[] textArray = compressText.toCharArray();</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">        for (char word : textArray) {</span>
+<span class="fc" id="L93">            INode node = getItemWithSymbol(String.valueOf(word));</span>
+<span class="fc bfc" id="L94" title="All 2 branches covered.">            if (node == null) {</span>
+<span class="fc" id="L95">                itens.add(new Node(new HuffmanItem(String.valueOf(word), 1)));</span>
             } else {
-<span class="fc" id="L92">                HuffmanItem symbol = node.getItem();</span>
-<span class="fc" id="L93">                symbol.setWeight(symbol.getWeight() + 1);</span>
+<span class="fc" id="L97">                HuffmanItem symbol = node.getItem();</span>
+<span class="fc" id="L98">                symbol.setWeight(symbol.getWeight() + 1);</span>
             }
         }
 
-<span class="fc" id="L97">    }</span>
+<span class="fc" id="L102">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

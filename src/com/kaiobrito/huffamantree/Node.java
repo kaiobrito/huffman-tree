@@ -5,41 +5,31 @@
  */
 package com.kaiobrito.huffamantree;
 
-import java.util.HashMap;
+import com.kaiobrito.huffamantree.interfaces.INode;
+import java.util.ArrayList;
 
 /**
  *
  * @author kaiobrito
  */
-public class Node implements Comparable<Node> {
-
-    private Node leftNode;
-
-    public void setLeftNode(Node leftNode) {
-        this.leftNode = leftNode;
-    }
-
-    public void setRightNode(Node rightNode) {
-        this.rightNode = rightNode;
-    }
-    private Node rightNode;
-    private HuffmanItem value;
+public class Node extends INode {
 
     public Node(HuffmanItem value) {
-        this.value = value;
+        super(value);
     }
 
-    public void addSon(Node node) {
+    @Override
+    public void addSon(INode node) {
         if (getValue() != node.getValue()) {
-            if (isLeaf()) {
-                if (getValue() > node.getValue()) {
-                    leftNode = node;
+            if (getValue() > node.getValue()) {
+                if (leftNode == null) {
+                    leftNode = (Node) node;
                 } else {
-                    rightNode = node;
+                    leftNode.addSon(node);
                 }
             } else {
-                if (getValue() > node.getValue()) {
-                    leftNode.addSon(node);
+                if (rightNode == null) {
+                    rightNode = (Node) node;
                 } else {
                     rightNode.addSon(node);
                 }
@@ -47,10 +37,7 @@ public class Node implements Comparable<Node> {
         }
     }
 
-    public HuffmanItem getItem() {
-        return value;
-    }
-
+    @Override
     public int getValue() {
         return value.getWeight();
     }
@@ -59,24 +46,67 @@ public class Node implements Comparable<Node> {
         return rightNode == null && leftNode == null;
     }
 
-    public Node getLeftNode() {
-        return leftNode;
-    }
-
-    public Node getRightNode() {
-        return rightNode;
-    }
-
     @Override
-    public int compareTo(Node o) {
+    public int compareTo(INode o) {
         return this.getItem().compareTo(o.getItem());
     }
 
+    @Override
     public String preOrder() {
         return (getItem().getSymbol())
                 + ((leftNode != null) ? leftNode.preOrder() : "")
                 + ((rightNode != null) ? rightNode.preOrder() : "");
 
+    }
+
+    @Override
+    public ArrayList<INode> getLeafs() {
+        ArrayList<INode> result = new ArrayList<>();
+        if (isLeaf()) {
+            result.add(this);
+            return result;
+        } else {
+            if (leftNode != null) {
+                result.addAll(leftNode.getLeafs());
+            }
+            if (rightNode != null) {
+                result.addAll(rightNode.getLeafs());
+            }
+            return result;
+        }
+    }
+
+    @Override
+    public String getBinarySon(String symbol) {
+
+        if (leftNode != null) {
+            if (leftNode.getItem().getSymbol().equals(symbol)) {
+                return "0";
+            } else {
+                String leftResult = leftNode.getBinarySon(symbol);
+                if (leftResult != null) {
+                    return "0" + leftResult;
+                }
+            }
+        }
+        if (rightNode != null) {
+            if (rightNode.getItem().getSymbol().equals(symbol)) {
+                return "1";
+            } else {
+
+                String rightResult = rightNode.getBinarySon(symbol);
+                if (rightResult != null) {
+                    return "1" + rightResult;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        return getItem().toString(); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

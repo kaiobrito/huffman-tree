@@ -5,6 +5,7 @@
  */
 package com.kaiobrito.huffamantree;
 
+import com.kaiobrito.huffamantree.interfaces.INode;
 import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -61,7 +62,7 @@ public class HuffmanTreeTest {
         HuffmanItem h1 = new HuffmanItem("a", 1);
         HuffmanItem h2 = new HuffmanItem("b", 1);
         HuffmanTree instance = new HuffmanTree();
-        ArrayList<Node> huffmanArray = new ArrayList<>();
+        ArrayList<INode> huffmanArray = new ArrayList<>();
         Node n1 = new Node(h1);
         huffmanArray.add(n1);
         huffmanArray.add(new Node(h2));
@@ -76,7 +77,7 @@ public class HuffmanTreeTest {
         HuffmanItem h1 = new HuffmanItem("a", 1);
         HuffmanItem h2 = new HuffmanItem("b", 1);
         HuffmanTree instance = new HuffmanTree();
-        ArrayList<Node> huffmanArray = new ArrayList<>();
+        ArrayList<INode> huffmanArray = new ArrayList<>();
         huffmanArray.add(new Node(h1));
         huffmanArray.add(new Node(h2));
         instance.setItens(huffmanArray);
@@ -129,7 +130,7 @@ public class HuffmanTreeTest {
         expresult.add(new Node(new HuffmanItem(" ", 1)));
         expresult.add(new Node(new HuffmanItem("c", 1)));
 
-        ArrayList<Node> result = instance.getTheTwoLessFrequenciesSymbols();
+        ArrayList<INode> result = instance.getTheTwoLessFrequenciesSymbols();
         assertEquals(expresult.get(0).compareTo(result.get(0)), 0);
         assertEquals(expresult.get(1).compareTo(result.get(1)), 0);
 
@@ -139,7 +140,20 @@ public class HuffmanTreeTest {
     public void testToTree() {
         System.out.println("toTree");
         HuffmanTree instance = new HuffmanTree("aaaaaabbbbbccccdddeef");
-        assertEquals(instance.toTree(), "**cb***feda");
+        assertEquals(instance.toTree().preOrder(), "**cb***feda");
 
+    }
+
+    @Test
+    public void testToTreeGetBinary() {
+        System.out.println("ToTreeGetBinary");
+        HuffmanTree instance = new HuffmanTree("aaaaaabbbbbccccdddeef");
+        INode root = instance.toTree();
+        assertEquals("11", root.getBinarySon("a"));
+        assertEquals("01", root.getBinarySon("b"));
+        assertEquals("00", root.getBinarySon("c"));
+        assertEquals("101", root.getBinarySon("d"));
+        assertEquals("1001", root.getBinarySon("e"));
+        assertEquals("1000", root.getBinarySon("f"));
     }
 }
