@@ -14,54 +14,69 @@ import java.util.HashMap;
 public class Node implements Comparable&lt;Node&gt; {
 
     private Node leftNode;
+
+    public void setLeftNode(Node leftNode) {
+<span class="fc" id="L19">        this.leftNode = leftNode;</span>
+<span class="fc" id="L20">    }</span>
+
+    public void setRightNode(Node rightNode) {
+<span class="fc" id="L23">        this.rightNode = rightNode;</span>
+<span class="fc" id="L24">    }</span>
     private Node rightNode;
     private HuffmanItem value;
 
-<span class="fc" id="L20">    public Node(HuffmanItem value) {</span>
-<span class="fc" id="L21">        this.value = value;</span>
-<span class="fc" id="L22">    }</span>
+<span class="fc" id="L28">    public Node(HuffmanItem value) {</span>
+<span class="fc" id="L29">        this.value = value;</span>
+<span class="fc" id="L30">    }</span>
 
     public void addSon(Node node) {
-<span class="fc bfc" id="L25" title="All 2 branches covered.">        if (getValue() != node.getValue()) {</span>
-<span class="fc bfc" id="L26" title="All 2 branches covered.">            if (isLeaf()) {</span>
-<span class="fc bfc" id="L27" title="All 2 branches covered.">                if (getValue() &gt; node.getValue()) {</span>
-<span class="fc" id="L28">                    leftNode = node;</span>
+<span class="fc bfc" id="L33" title="All 2 branches covered.">        if (getValue() != node.getValue()) {</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">            if (isLeaf()) {</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">                if (getValue() &gt; node.getValue()) {</span>
+<span class="fc" id="L36">                    leftNode = node;</span>
                 } else {
-<span class="fc" id="L30">                    rightNode = node;</span>
+<span class="fc" id="L38">                    rightNode = node;</span>
                 }
             } else {
-<span class="fc bfc" id="L33" title="All 2 branches covered.">                if (getValue() &gt; node.getValue()) {</span>
-<span class="fc" id="L34">                    leftNode.addSon(node);</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">                if (getValue() &gt; node.getValue()) {</span>
+<span class="fc" id="L42">                    leftNode.addSon(node);</span>
                 } else {
-<span class="fc" id="L36">                    rightNode.addSon(node);</span>
+<span class="fc" id="L44">                    rightNode.addSon(node);</span>
                 }
             }
         }
-<span class="fc" id="L40">    }</span>
+<span class="fc" id="L48">    }</span>
 
     public HuffmanItem getItem() {
-<span class="fc" id="L43">        return value;</span>
+<span class="fc" id="L51">        return value;</span>
     }
 
     public int getValue() {
-<span class="fc" id="L47">        return value.getWeight();</span>
+<span class="fc" id="L55">        return value.getWeight();</span>
     }
 
     public boolean isLeaf() {
-<span class="fc bfc" id="L51" title="All 4 branches covered.">        return rightNode == null &amp;&amp; leftNode == null;</span>
+<span class="fc bfc" id="L59" title="All 4 branches covered.">        return rightNode == null &amp;&amp; leftNode == null;</span>
     }
 
     public Node getLeftNode() {
-<span class="fc" id="L55">        return leftNode;</span>
+<span class="fc" id="L63">        return leftNode;</span>
     }
 
     public Node getRightNode() {
-<span class="fc" id="L59">        return rightNode;</span>
+<span class="fc" id="L67">        return rightNode;</span>
     }
 
     @Override
     public int compareTo(Node o) {
-<span class="fc" id="L64">        return this.getItem().compareTo(o.getItem());</span>
+<span class="fc" id="L72">        return this.getItem().compareTo(o.getItem());</span>
+    }
+
+    public String preOrder() {
+<span class="fc bfc" id="L76" title="All 4 branches covered.">        return (getItem().getSymbol())</span>
+                + ((leftNode != null) ? leftNode.preOrder() : &quot;&quot;)
+                + ((rightNode != null) ? rightNode.preOrder() : &quot;&quot;);
+
     }
 
 }

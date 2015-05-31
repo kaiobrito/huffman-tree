@@ -24,13 +24,25 @@ public class HuffmanTree {
     public HuffmanTree() {
     }
 
-    public void toTree() {
-        ArrayList<Node> twoLess = getTheTwoLessFrequenciesSymbols();
+    public String toTree() {
+        ArrayList<Node> copyItens = new ArrayList<>(itens);
+        while (itens.size() > 1) {
+            Collections.sort(itens);
+            ArrayList<Node> twoLess = getTheTwoLessFrequenciesSymbols();
+            Node n1 = twoLess.get(0);
+            Node n2 = twoLess.get(1);
+            Node root = new Node(new HuffmanItem("*", n1.getItem().getWeight() + n2.getItem().getWeight()));
 
+            root.setLeftNode(n1);
+            root.setRightNode(n2);
+
+            itens.add(root);
+        }
+        return itens.get(0).preOrder();
     }
 
     public HuffmanTree(String compressText) {
-        this.setCompressText(compressText);
+        setCompressText(compressText);
     }
 
     public void setItens(ArrayList<Node> itens) {

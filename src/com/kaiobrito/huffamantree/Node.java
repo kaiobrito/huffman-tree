@@ -14,6 +14,14 @@ import java.util.HashMap;
 public class Node implements Comparable<Node> {
 
     private Node leftNode;
+
+    public void setLeftNode(Node leftNode) {
+        this.leftNode = leftNode;
+    }
+
+    public void setRightNode(Node rightNode) {
+        this.rightNode = rightNode;
+    }
     private Node rightNode;
     private HuffmanItem value;
 
@@ -62,6 +70,13 @@ public class Node implements Comparable<Node> {
     @Override
     public int compareTo(Node o) {
         return this.getItem().compareTo(o.getItem());
+    }
+
+    public String preOrder() {
+        return (getItem().getSymbol())
+                + ((leftNode != null) ? leftNode.preOrder() : "")
+                + ((rightNode != null) ? rightNode.preOrder() : "");
+
     }
 
 }

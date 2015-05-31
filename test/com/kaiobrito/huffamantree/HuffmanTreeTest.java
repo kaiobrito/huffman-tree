@@ -134,4 +134,12 @@ public class HuffmanTreeTest {
         assertEquals(expresult.get(1).compareTo(result.get(1)), 0);
 
     }
+
+    @Test
+    public void testToTree() {
+        System.out.println("toTree");
+        HuffmanTree instance = new HuffmanTree("aaaaaabbbbbccccdddeef");
+        assertEquals(instance.toTree(), "**cb***feda");
+
+    }
 }
