@@ -60,7 +60,7 @@ public class HuffmanItemTest {
     public void testCompareToEqual() {
         System.out.println("CompareToEqual");
         HuffmanItem o = new HuffmanItem("a", 100);
-        HuffmanItem instance = new HuffmanItem("b", 100);
+        HuffmanItem instance = new HuffmanItem("a", 100);
         int expResult = 0;
         int result = instance.compareTo(o);
         assertEquals(expResult, result);
@@ -101,6 +101,31 @@ public class HuffmanItemTest {
         expresult.add(h3);
         expresult.add(h1);
         expresult.add(h2);
+
+        Collections.sort(array);
+
+        assertEquals(expresult, array);
+
+    }
+
+    @Test
+    public void testSortArrayHuffmanItensWithRepatedValue() {
+        System.out.println("SortHuffmanItens");
+        HuffmanItem h1 = new HuffmanItem("a", 100);
+        HuffmanItem h2 = new HuffmanItem("b", 200);
+        HuffmanItem h2d = new HuffmanItem("d", 200);
+        HuffmanItem h3 = new HuffmanItem("c", 40);
+        ArrayList<HuffmanItem> array = new ArrayList<>();
+        array.add(h1);
+        array.add(h2);
+        array.add(h2d);
+        array.add(h3);
+
+        ArrayList<HuffmanItem> expresult = new ArrayList<>();
+        expresult.add(h3);
+        expresult.add(h1);
+        expresult.add(h2);
+        expresult.add(h2d);
 
         Collections.sort(array);
 

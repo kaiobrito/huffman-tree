@@ -48,6 +48,14 @@ public class HuffmanTreeTest {
     }
 
     @Test
+    public void testGetItens() {
+        System.out.println("setCompressText");
+        String compressText = "";
+        HuffmanTree instance = new HuffmanTree(compressText);
+        assertEquals(instance.getItens(), new ArrayList<HuffmanItem>());
+    }
+
+    @Test
     public void testGetItemWithSymbol() {
         System.out.println("setCompressText");
         HuffmanItem h1 = new HuffmanItem("a", 1);
@@ -97,6 +105,18 @@ public class HuffmanTreeTest {
         assertEquals(instance.getItemWithSymbol("b").getWeight(), 2, 0);
         assertEquals(instance.getItemWithSymbol("c").getWeight(), 1, 0);
         assertEquals(instance.getItemWithSymbol(" ").getWeight(), 1, 0);
+
+    }
+
+    @Test
+    public void testGetLessFrequentHuffmanItens() {
+        System.out.println("GetLessFrequentHuffmanItens");
+        String compressText = "daaabbc ";
+        HuffmanTree instance = new HuffmanTree();
+        instance.setCompressText(compressText);
+        System.out.println(instance.getTheLessFrequenctTwoSymbols());
+        System.out.println(instance.getTheLessFrequenctTwoSymbols());
+        System.out.println(instance.getTheLessFrequenctTwoSymbols());
 
     }
 }

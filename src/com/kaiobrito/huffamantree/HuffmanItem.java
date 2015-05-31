@@ -39,11 +39,11 @@ public class HuffmanItem implements Comparable<HuffmanItem> {
     public int compareTo(HuffmanItem o) {
         if (this.getWeight() < o.getWeight()) {
             return -1;
-        }
-        if (this.getWeight() > o.getWeight()) {
+        } else if (this.getWeight() > o.getWeight()) {
             return 1;
+        } else {
+            return (this.getSymbol().equals(o.getSymbol())) ? 0 : this.getSymbol().compareTo(o.getSymbol());
         }
-        return 0;
     }
 
     @Override

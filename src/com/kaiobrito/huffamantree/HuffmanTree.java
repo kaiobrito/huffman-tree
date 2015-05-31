@@ -6,6 +6,7 @@
 package com.kaiobrito.huffamantree;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
@@ -15,6 +16,10 @@ public class HuffmanTree {
 
     private ArrayList<HuffmanItem> itens;
     private String compressText;
+
+    public ArrayList<HuffmanItem> getItens() {
+        return itens;
+    }
 
     public HuffmanTree() {
     }
@@ -34,6 +39,17 @@ public class HuffmanTree {
             }
         }
         return null;
+    }
+
+    public ArrayList<HuffmanItem> getTheLessFrequenctTwoSymbols() {
+        Collections.sort(itens);
+        ArrayList<HuffmanItem> result = new ArrayList<>();
+        for (int i = 0; i < 2 && i < itens.size(); i++) {
+            result.add(0, itens.get(0));
+            itens.remove(0);
+        }
+        Collections.sort(result);
+        return result;
     }
 
     public String getCompressText() {
